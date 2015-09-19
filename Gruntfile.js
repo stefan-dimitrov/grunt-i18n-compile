@@ -52,12 +52,22 @@ module.exports = function (grunt) {
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js']
+    },
+
+    watch: {
+      scripts: {
+        files: ['tasks/*.js', 'test/*.js'],
+        tasks: ['jshint', 'test']
+      }
     }
 
   });
 
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
+
+  // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
