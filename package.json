@@ -1,0 +1,40 @@
+{
+  "name": "grunt-i18n-compile",
+  "version": "0.0.1",
+  "description": "Grunt Plugin for assembling JSON output files from language-merged YAML input files.",
+  "homepage": "https://github.com/stefan-dimitrov/grunt-i18n-compile",
+  "repository": "git@github.com:stefan-dimitrov/grunt-i18n-compile.git",
+  "author": {
+    "name": "Stefan Dimitrov",
+    "email": "stefan.dimitrov.009@gmail.com",
+    "url": "https://github.com/stefan-dimitrov"
+  },
+  "keywords": [
+    "gruntplugin",
+    "i18n", "i18next", "angular",
+    "translate",
+    "translation",
+    "internationalization",
+    "language",
+    "assemble",
+    "compile",
+    "yaml",
+    "json"
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-nodeunit": "~0.3.0",
+    "grunt": "~0.4.1",
+    "jshint-stylish": "~0.1.5",
+    "load-grunt-tasks": "~0.3.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}
