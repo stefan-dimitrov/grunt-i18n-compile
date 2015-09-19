@@ -1,6 +1,6 @@
 # grunt-i18n-compile
 
-> The best Grunt plugin ever.
+Grunt Plugin for assembling JSON output files from language-merged YAML input files.
 
 ## Getting Started
 This plugin requires Grunt.
@@ -37,46 +37,47 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+#### options.merge
+Type: `Boolean`
+Default value: `false`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+If `true` the output will be a single file with the translations for all languages merged inside it.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the compiled translations for each language are written to a separate file
 
 ```js
 grunt.initConfig({
   i18n_compile: {
     options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/translations-.json': ['src/**/*.yml'],
     },
   },
 })
 ```
+The language id is by default inserted right before the last `.` of the file name. *(If there is no `.` present
+then the language id is inserted at the end of the file name)* <br>
+So if we have the languages `en` and `bg`, the resulting files will be
+```
+dest/translations-en.json
+dest/translations-bg.json
+```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+
+#### Merge translations in one file
+In this example, the compiled translations for all languages are merged into a single file
 
 ```js
 grunt.initConfig({
   i18n_compile: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      merge: true
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/translations.json': ['src/**/*.yml'],
     },
   },
 })
