@@ -22,32 +22,38 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
+var errorMsg = 'compilation should match the expected compiled file ';
 exports.i18n_compile = {
   setUp: function (done) {
     // setup here if necessary
     done();
   },
   default_options: function (test) {
-    test.expect(1);
+    test.expect(3);
+
+    var compiled_en = 'test/expected/file_per_lang/translations_en.json';
+    var compiled_pt = 'test/expected/file_per_lang/translations_pt.json';
+    var compiled_es = 'test/expected/file_per_lang/translations_es.json';
 
     var actual_en = grunt.file.read('tmp/file_per_lang/translations_en.json');
     var actual_pt = grunt.file.read('tmp/file_per_lang/translations_pt.json');
     var actual_es = grunt.file.read('tmp/file_per_lang/translations_es.json');
-    var expected_en = grunt.file.read('test/expected/file_per_lang/translations_en.json');
-    var expected_pt = grunt.file.read('test/expected/file_per_lang/translations_pt.json');
-    var expected_es = grunt.file.read('test/expected/file_per_lang/translations_es.json');
-    test.equal(actual_en, expected_en, 'should describe what the default behavior is.');
-    test.equal(actual_pt, expected_pt, 'should describe what the default behavior is.');
-    test.equal(actual_es, expected_es, 'should describe what the default behavior is.');
+    var expected_en = grunt.file.read(compiled_en);
+    var expected_pt = grunt.file.read(compiled_pt);
+    var expected_es = grunt.file.read(compiled_es);
+    test.equal(actual_en, expected_en, errorMsg + compiled_en);
+    test.equal(actual_pt, expected_pt, errorMsg + compiled_pt);
+    test.equal(actual_es, expected_es, errorMsg + compiled_es);
 
     test.done();
   },
   merge_langs: function (test) {
     test.expect(1);
 
+    var compiled = 'test/expected/merge_langs.json';
     var actual = grunt.file.read('tmp/merge_langs.json');
-    var expected = grunt.file.read('test/expected/merge_langs.json');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var expected = grunt.file.read(compiled);
+    test.equal(actual, expected, errorMsg + compiled);
 
     test.done();
   }

@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       default_options: {
         options: {},
         files: {
-          'tmp/file_per_lang/translations_.json': ['test/fixtures/country_i18n.yaml', 'test/fixtures/menu_i18n.yaml']
+          'tmp/file_per_lang/translations_.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
         }
       },
       merge_langs: {
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
           merge: true
         },
         files: {
-          'tmp/merge_langs.json': ['test/fixtures/country_i18n.yaml', 'test/fixtures/menu_i18n.yaml']
+          'tmp/merge_langs.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
         }
       }
     },

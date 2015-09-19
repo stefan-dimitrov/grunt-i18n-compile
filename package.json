@@ -11,7 +11,9 @@
   },
   "keywords": [
     "gruntplugin",
-    "i18n", "i18next", "angular",
+    "i18n",
+    "i18next",
+    "angular",
     "translate",
     "translation",
     "internationalization",
@@ -36,5 +38,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
   }
 }
