@@ -1,4 +1,4 @@
-# grunt-i18n-compile
+# grunt-i18n-compile  &nbsp; [ ![Codeship Status for stefan-dimitrov/grunt-i18n-compile](https://codeship.com/projects/06c87fd0-4149-0133-3d15-4252ee2bf12d/status?branch=master)](https://codeship.com/projects/103580)
 
 Grunt Plugin for assembling JSON output files from language-merged YAML input files.
 
