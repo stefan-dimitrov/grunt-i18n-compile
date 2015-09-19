@@ -34,19 +34,17 @@ module.exports = function (grunt) {
     // Configuration to be run (and then tested).
     i18n_compile: {
       default_options: {
-        options: {
-        },
+        options: {},
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/file_per_lang/translations_.json': ['test/fixtures/country_i18n.yaml', 'test/fixtures/menu_i18n.yaml']
         }
       },
-      custom_options: {
+      merge_langs: {
         options: {
-          separator: ': ',
-          punctuation: ' !!!'
+          merge: true
         },
         files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/merge_langs.json': ['test/fixtures/country_i18n.yaml', 'test/fixtures/menu_i18n.yaml']
         }
       }
     },

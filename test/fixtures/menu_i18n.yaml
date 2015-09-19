@@ -1,0 +1,25 @@
+MENU:
+  CART:
+    EMPTY:
+      en: Empty Cart
+      pt: Esvaziar Carrinho
+      es: Vaciar Carrito
+    CHECKOUT:
+      en: Checkout
+      pt: Fechar Pedido
+      es: Realizar Pedido
+
+  USER:
+    LABEL:
+      en: User
+      pt: Usuário
+      es: Usuario
+    DROPDOWN:
+      EDIT:
+        en: Edit
+        pt: Editar
+        es: Editar
+      LOGOUT:
+        en: Logout
+        pt: Sair
+        es: Finalizar la Sesión

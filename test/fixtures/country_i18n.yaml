@@ -1,0 +1,28 @@
+COUNTRY:
+  USA:
+    NAME:
+      en: United States
+      pt: Estados Unidos
+      es: Estados Unidos
+    LANGUAGE:
+      en: English
+      pt: Inglês
+      es: Inglés
+  BRAZIL:
+    NAME:
+      en: Brazil
+      pt: Brasil
+      es: Brasil
+    LANGUAGE:
+      en: Portuguese
+      pt: Português
+      es: Portugués
+  SPAIN:
+    NAME:
+      en: Spain
+      pt: Espanha
+      es: España
+    LANGUAGE:
+      en: Spanish
+      pt: Espanhol
+      es: Español

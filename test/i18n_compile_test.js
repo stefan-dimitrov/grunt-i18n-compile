@@ -30,17 +30,23 @@ exports.i18n_compile = {
   default_options: function (test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var actual_en = grunt.file.read('tmp/file_per_lang/translations_en.json');
+    var actual_pt = grunt.file.read('tmp/file_per_lang/translations_pt.json');
+    var actual_es = grunt.file.read('tmp/file_per_lang/translations_es.json');
+    var expected_en = grunt.file.read('test/expected/file_per_lang/translations_en.json');
+    var expected_pt = grunt.file.read('test/expected/file_per_lang/translations_pt.json');
+    var expected_es = grunt.file.read('test/expected/file_per_lang/translations_es.json');
+    test.equal(actual_en, expected_en, 'should describe what the default behavior is.');
+    test.equal(actual_pt, expected_pt, 'should describe what the default behavior is.');
+    test.equal(actual_es, expected_es, 'should describe what the default behavior is.');
 
     test.done();
   },
-  custom_options: function (test) {
+  merge_langs: function (test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
+    var actual = grunt.file.read('tmp/merge_langs.json');
+    var expected = grunt.file.read('test/expected/merge_langs.json');
     test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
 
     test.done();
