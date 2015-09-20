@@ -1,6 +1,8 @@
 # grunt-i18n-compile  &nbsp; [ ![Codeship Status for stefan-dimitrov/grunt-i18n-compile](https://codeship.com/projects/06c87fd0-4149-0133-3d15-4252ee2bf12d/status?branch=master)](https://codeship.com/projects/103580)
 
-Grunt Plugin for assembling JSON output files from language-merged YAML input files.
+Grunt Plugin for assembling translation JSON output files from language-merged YAML input files.
+
+Output files are compatible with [angular-translate](https://angular-translate.github.io/) and [i18next](http://i18next.com/)
 
 ## Getting Started
 This plugin requires Grunt.
@@ -16,6 +18,110 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 ```js
 grunt.loadNpmTasks('grunt-i18n-compile');
 ```
+
+## The translation format
+
+The format is inspired by [grunt-translate-compile](https://www.npmjs.com/package/grunt-translate-compile).
+
+It is intended to greatly reduce the amount of typing needed to translate your app.
+
+The YAML file format is used because it requires less typing compared to JSON - no need to enclose both properties and values in `" "`s,
+and nesting is done by indentation instead of blocks of curly braces.
+
+The structure of the translations inside the file is like the following:
+```yaml
+MENU:
+  CART:
+    EMPTY:
+      en: Empty Cart
+      pt: Esvaziar Carrinho
+      es: Vaciar Carrito
+    CHECKOUT:
+      en: Checkout
+      pt: Fechar Pedido
+      es: Realizar Pedido
+  USER:
+    LABEL:
+      en: User
+      pt: Usuário
+      es: Usuario
+    DROPDOWN:
+      EDIT:
+        en: Edit
+        pt: Editar
+        es: Editar
+      LOGOUT:
+        en: Logout
+        pt: Sair
+        es: Finalizar la Sesión
+```
+
+Notice how the translation values are assigned directly to the language keys.
+This way translations for all languages can be described in a single file, which eliminates the need to copy
+the translation ids over to other files for each language that you have.
+
+That structure reduces the size of your sources and makes your translations more manageable.
+
+Compiling the above example will result in the following output files:
+- *translation_en.json*
+  ```json
+  {
+    "MENU": {
+      "CART": {
+        "EMPTY": "Empty Cart",
+        "CHECKOUT": "Checkout"
+      },
+      "USER": {
+        "LABEL": "User",
+        "DROPDOWN": {
+          "EDIT": "Edit",
+          "LOGOUT": "Logout"
+        }
+      }
+    }
+  }
+
+  ```
+
+- *translation_pt.json*
+  ```json
+  {
+    "MENU": {
+      "CART": {
+        "EMPTY": "Esvaziar Carrinho",
+        "CHECKOUT": "Fechar Pedido"
+      },
+      "USER": {
+        "LABEL": "Usuário",
+        "DROPDOWN": {
+          "EDIT": "Editar",
+          "LOGOUT": "Sair"
+        }
+      }
+    }
+  }
+
+  ```
+
+- *translation_es.json*
+  ```json
+  {
+    "MENU": {
+      "CART": {
+        "EMPTY": "Vaciar Carrito",
+        "CHECKOUT": "Realizar Pedido"
+      },
+      "USER": {
+        "LABEL": "Usuario",
+        "DROPDOWN": {
+          "EDIT": "Editar",
+          "LOGOUT": "Finalizar la Sesión"
+        }
+      }
+    }
+  }
+
+  ```
 
 ## The "i18n_compile" task
 
@@ -68,7 +174,7 @@ dest/translations-bg.json
 
 
 #### Merge translations in one file
-In this example, the compiled translations for all languages are merged into a single file
+With `merge` set to `true` the compiled translations for all languages are merged into a single file
 
 ```js
 grunt.initConfig({
