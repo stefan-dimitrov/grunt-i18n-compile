@@ -23,6 +23,10 @@ var grunt = require('grunt');
 */
 
 var errorMsg = 'compilation should match the expected compiled file ';
+var compiled_en = 'test/expected/file_per_lang/translations_en.json';
+var compiled_pt = 'test/expected/file_per_lang/translations_pt.json';
+var compiled_es = 'test/expected/file_per_lang/translations_es.json';
+
 exports.i18n_compile = {
   setUp: function (done) {
     // setup here if necessary
@@ -30,10 +34,6 @@ exports.i18n_compile = {
   },
   default_options: function (test) {
     test.expect(3);
-
-    var compiled_en = 'test/expected/file_per_lang/translations_en.json';
-    var compiled_pt = 'test/expected/file_per_lang/translations_pt.json';
-    var compiled_es = 'test/expected/file_per_lang/translations_es.json';
 
     var actual_en = grunt.file.read('tmp/file_per_lang/translations_en.json');
     var actual_pt = grunt.file.read('tmp/file_per_lang/translations_pt.json');
@@ -54,6 +54,51 @@ exports.i18n_compile = {
     var actual = grunt.file.read('tmp/merge_langs.json');
     var expected = grunt.file.read(compiled);
     test.equal(actual, expected, errorMsg + compiled);
+
+    test.done();
+  },
+  lang_placing: function (test) {
+    test.expect(3);
+
+    var actual_en = grunt.file.read('tmp/filename_lang_placing/i18n-en-file.json');
+    var actual_pt = grunt.file.read('tmp/filename_lang_placing/i18n-pt-file.json');
+    var actual_es = grunt.file.read('tmp/filename_lang_placing/i18n-es-file.json');
+    var expected_en = grunt.file.read(compiled_en);
+    var expected_pt = grunt.file.read(compiled_pt);
+    var expected_es = grunt.file.read(compiled_es);
+    test.equal(actual_en, expected_en, errorMsg + compiled_en);
+    test.equal(actual_pt, expected_pt, errorMsg + compiled_pt);
+    test.equal(actual_es, expected_es, errorMsg + compiled_es);
+
+    test.done();
+  },
+  lang_placing_missing_place: function (test) {
+    test.expect(3);
+
+    var actual_en = grunt.file.read('tmp/filename_lang_placing/missing/i18n-file_en.json');
+    var actual_pt = grunt.file.read('tmp/filename_lang_placing/missing/i18n-file_pt.json');
+    var actual_es = grunt.file.read('tmp/filename_lang_placing/missing/i18n-file_es.json');
+    var expected_en = grunt.file.read(compiled_en);
+    var expected_pt = grunt.file.read(compiled_pt);
+    var expected_es = grunt.file.read(compiled_es);
+    test.equal(actual_en, expected_en, errorMsg + compiled_en);
+    test.equal(actual_pt, expected_pt, errorMsg + compiled_pt);
+    test.equal(actual_es, expected_es, errorMsg + compiled_es);
+
+    test.done();
+  },
+  lang_placing_multi: function (test) {
+    test.expect(3);
+
+    var actual_en = grunt.file.read('tmp/filename_lang_placing/en/i18n_en_file.json');
+    var actual_pt = grunt.file.read('tmp/filename_lang_placing/pt/i18n_pt_file.json');
+    var actual_es = grunt.file.read('tmp/filename_lang_placing/es/i18n_es_file.json');
+    var expected_en = grunt.file.read(compiled_en);
+    var expected_pt = grunt.file.read(compiled_pt);
+    var expected_es = grunt.file.read(compiled_es);
+    test.equal(actual_en, expected_en, errorMsg + compiled_en);
+    test.equal(actual_pt, expected_pt, errorMsg + compiled_pt);
+    test.equal(actual_es, expected_es, errorMsg + compiled_es);
 
     test.done();
   }

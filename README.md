@@ -128,20 +128,31 @@ Compiling the above example will result in the following output files:
 ### Overview
 In your project's Gruntfile, add a section named `i18n_compile` to the data object passed into `grunt.initConfig()`.
 
+Example:
 ```js
 grunt.initConfig({
   i18n_compile: {
     options: {
-      // Task-specific options go here.
+      langPlace: '[lang]'
     },
     your_target: {
-      // Target-specific file lists and/or options go here.
+      files: {
+        'dest/i18n/[lang].json': ['src/app/**/*.yaml', 'src/common/**/*.yaml']
+      }
     },
   },
 })
 ```
 
 ### Options
+
+#### options.langPlace
+Type: `String`
+Default value: `''` *(empty string)*
+
+If specified the value*(if present in the output file path)* will be replaced with the language id.
+
+This option has no effect when the `merge` option is `true`.
 
 #### options.merge
 Type: `Boolean`
@@ -158,9 +169,11 @@ In this example, the compiled translations for each language are written to a se
 grunt.initConfig({
   i18n_compile: {
     options: {},
-    files: {
-      'dest/translations-.json': ['src/**/*.yml'],
-    },
+    default_target: {
+      files: {
+        'dest/translations-.json': ['src/**/*.yml']
+      }
+    }
   },
 })
 ```
@@ -173,6 +186,30 @@ dest/translations-bg.json
 ```
 
 
+#### Placement of language id
+In this example, the language id is placed at a custom location in the output file path
+
+```js
+grunt.initConfig({
+  i18n_compile: {
+    options: {
+      langPlace: '<lang>'
+    },
+    default_target: {
+      files: {
+        'dest/path/<lang>-translations.json': ['src/**/*.yml']
+      }
+    }
+  },
+})
+```
+So if we have the languages `en` and `bg`, the resulting files will be
+```
+dest/path/en-translations.json
+dest/path/bg-translations.json
+```
+
+
 #### Merge translations in one file
 With `merge` set to `true` the compiled translations for all languages are merged into a single file
 
@@ -182,9 +219,11 @@ grunt.initConfig({
     options: {
       merge: true
     },
-    files: {
-      'dest/translations.json': ['src/**/*.yml'],
-    },
+    default_target: {
+      files: {
+        'dest/translations.json': ['src/**/*.yml']
+      }
+    }
   },
 })
 ```

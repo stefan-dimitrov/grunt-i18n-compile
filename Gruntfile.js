@@ -46,6 +46,30 @@ module.exports = function (grunt) {
         files: {
           'tmp/merge_langs.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
         }
+      },
+      lang_placing: {
+        options: {
+          langPlace: '[lang]'
+        },
+        files: {
+          'tmp/filename_lang_placing/i18n-[lang]-file.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
+        }
+      },
+      lang_placing_missing_place: {
+        options: {
+          langPlace: '[lang]'
+        },
+        files: {
+          'tmp/filename_lang_placing/missing/i18n-file_.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
+        }
+      },
+      lang_placing_multi: {
+        options: {
+          langPlace: '{lang}'
+        },
+        files: {
+          'tmp/filename_lang_placing/{lang}/i18n_{lang}_file.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
+        }
       }
     },
 

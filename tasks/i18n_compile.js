@@ -20,7 +20,8 @@ module.exports = function (grunt) {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      merge: false
+      merge: false,
+      langPlace: ''
     });
 
     // Iterate over all specified file groups.
@@ -54,7 +55,7 @@ module.exports = function (grunt) {
 
       // Write the destination files.
       for (var lang in compiled) {
-        var fileDest = langFileDest(file, lang);
+        var fileDest = langFileDest(file, lang, options.langPlace);
         grunt.file.write(fileDest, JSON.stringify(compiled[lang]));
 
         // Print a success message.
@@ -111,7 +112,14 @@ module.exports = function (grunt) {
     return resultList;
   }
 
-  function langFileDest (file, lang) {
+  function langFileDest (file, lang, langPlace) {
+    if (langPlace && file.dest.indexOf(langPlace) >= 0) {
+
+      var matching = new RegExp(_.escapeRegExp(langPlace), 'g');
+      return file.dest.replace(matching, lang);
+    }
+
+    // Default - place language id before last '.'
     var parts = file.dest.split(/([.][^.\/]+$)/i, 2);
 
     if (parts.length > 1) {
