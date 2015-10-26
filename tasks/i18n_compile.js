@@ -90,13 +90,8 @@ module.exports = function (grunt) {
     var resultList = [];
     for (var property in subObject) {
       // Get the language key and the translation value
-      if (_.isString(subObject[property])) {
-        resultList.push([property, subObject[property]]);
-        continue;
-      }
-
-      // Nothing to do here. Just skip over
       if (!_.isPlainObject(subObject[property])) {
+        resultList.push([property, subObject[property]]);
         continue;
       }
 

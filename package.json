@@ -1,6 +1,6 @@
 {
   "name": "grunt-i18n-compile",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Grunt Plugin for assembling JSON output files from language-merged YAML input files.",
   "homepage": "https://github.com/stefan-dimitrov/grunt-i18n-compile",
   "repository": "git@github.com:stefan-dimitrov/grunt-i18n-compile.git",

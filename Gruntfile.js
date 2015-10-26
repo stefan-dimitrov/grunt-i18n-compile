@@ -70,6 +70,14 @@ module.exports = function (grunt) {
         files: {
           'tmp/filename_lang_placing/{lang}/i18n_{lang}_file.json': ['test/fixtures/menu_i18n.yaml', 'test/fixtures/country_i18n.yaml']
         }
+      },
+      lists: {
+        options: {
+          merge: true
+        },
+        files: {
+          'tmp/lists_merged.json': ['test/fixtures/templates_i18n.yaml']
+        }
       }
     },
 

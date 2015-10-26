@@ -1,0 +1,20 @@
+TEMPLATES:
+  COMMENTS:
+    HEADING:
+      en: Comment templates
+      bg: Шаблони за коментари
+    VALUES:
+      en: ['Test comment', 'Comment 2', 'My template']
+      bg: ['Тестов коментар', 'Коментар 2', 'Моят шаблон']
+
+  DESCRIPTIONS:
+    HEADING:
+      en: Description templates
+      bg: Шаблони за описания
+    VALUES:
+      en:
+        - Description 1
+        - My test description
+      bg:
+        - Описание 1
+        - Моето тестово описание

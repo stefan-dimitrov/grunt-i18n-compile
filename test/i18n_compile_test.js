@@ -101,5 +101,15 @@ exports.i18n_compile = {
     test.equal(actual_es, expected_es, errorMsg + compiled_es);
 
     test.done();
+  },
+  lists: function (test) {
+    test.expect(1);
+
+    var compiled = 'test/expected/templates_merged.json';
+    var actual = grunt.file.read('tmp/lists_merged.json');
+    var expected = grunt.file.read(compiled);
+    test.equal(actual, expected, errorMsg + compiled);
+
+    test.done();
   }
 };
