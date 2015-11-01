@@ -1,7 +1,7 @@
 {
   "name": "grunt-i18n-compile",
-  "version": "0.1.4",
-  "description": "Grunt Plugin for assembling JSON output files from language-merged YAML input files.",
+  "version": "0.2.0",
+  "description": "Grunt Plugin for assembling JSON translation files from language-merged YAML input files.",
   "homepage": "https://github.com/stefan-dimitrov/grunt-i18n-compile",
   "repository": "git@github.com:stefan-dimitrov/grunt-i18n-compile.git",
   "author": {
@@ -10,9 +10,18 @@
     "url": "https://github.com/stefan-dimitrov"
   },
   "keywords": [
-    "gruntplugin", "i18n", "i18next", "angular", "translate",
-    "translation", "language", "pre-compiler", "assemble", "compile",
-    "yaml", "json"
+    "gruntplugin",
+    "i18n",
+    "i18next",
+    "angular",
+    "translate",
+    "translation",
+    "language",
+    "pre-compiler",
+    "assemble",
+    "compile",
+    "yaml",
+    "json"
   ],
   "main": "Gruntfile.js",
   "engines": {
@@ -20,18 +29,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-contrib-nodeunit": "~0.3.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "jshint-stylish": "~0.1.5",
-    "load-grunt-tasks": "~0.3.0"
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-nodeunit": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-force-task": "^2.0.0",
+    "jshint-stylish": "^2.2.0",
+    "load-grunt-tasks": "^3.5.0",
+    "logfile-grunt": "^0.3.0"
   },
   "scripts": {
     "test": "grunt test"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "js-yaml": ">=3.4",
+    "lodash": ">=3.10"
   }
 }

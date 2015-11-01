@@ -12,6 +12,9 @@ module.exports = function (grunt) {
   // load all npm grunt tasks
   require('load-grunt-tasks')(grunt);
 
+  var _ = require('lodash');
+  var logfile = require('logfile-grunt');
+
   // Project configuration.
   grunt.initConfig({
     jshint: {
@@ -78,6 +81,22 @@ module.exports = function (grunt) {
         files: {
           'tmp/lists_merged.json': ['test/fixtures/templates_i18n.yaml']
         }
+      },
+      sibling_values_and_children: {
+        options: {
+          merge: true
+        },
+        files: {
+          'tmp/sibling_values_and_children.json': ['test/fixtures/sibling_values_and_children_i18n.yaml']
+        }
+      },
+      bad_indentation: {
+        options: {
+          merge: true
+        },
+        files: {
+          'tmp/bad_indentation.json': ['test/fixtures/bad_indentation_i18n.yaml']
+        }
       }
     },
 
@@ -95,15 +114,44 @@ module.exports = function (grunt) {
 
   });
 
+  var ERROR_TASKS = ['bad_indentation', 'sibling_values_and_children'];
+
+  /**
+   * Gather i18n_compile sub-tasks to be executed
+   * @param {Array} excluded list of excluded sub-tasks
+   * @returns {Array} the sub-tasks
+   */
+  function subTasksExcluding(excluded) {
+    var mainTask = 'i18n_compile';
+    var i18nCompileTasks = grunt.config.data[mainTask];
+
+    var subTasks = _.keys(i18nCompileTasks);
+    return _.difference(subTasks, excluded).map(function (subTask) {
+      return mainTask + ':' + subTask;
+    });
+  }
+
   // Actually load this plugin's task(s).
   grunt.loadTasks('tasks');
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  grunt.registerTask('success_tasks', 'Tasks expected to succeed.', function () {
+    grunt.task.run(subTasksExcluding(ERROR_TASKS));
+  });
+
+  grunt.registerTask('error_tasks', 'Tasks expected to produce errors.', function () {
+    logfile(grunt, {filePath: 'tmp/error_logging_tasks.log', clearLogFile: true});
+
+    grunt.task.run(ERROR_TASKS.map(function (subTask) {
+      return 'i18n_compile:' + subTask;
+    }));
+  });
+
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'i18n_compile', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'success_tasks', 'force:error_tasks', 'nodeunit']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['jshint', 'test']);

@@ -9,6 +9,7 @@
 'use strict';
 
 var _ = require('lodash');
+var yaml = require('js-yaml');
 
 module.exports = function (grunt) {
 
@@ -16,7 +17,7 @@ module.exports = function (grunt) {
   // creation: http://gruntjs.com/creating-tasks
 
   grunt.registerMultiTask('i18n_compile',
-    'Assemble JSON output files from language-merged YAML input files.', function () {
+    'Assemble JSON translation files from language-merged YAML input files.', function () {
 
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
@@ -37,7 +38,15 @@ module.exports = function (grunt) {
         }
       }).map(function (filepath) {
         // Read YAML file.
-        return grunt.file.readYAML(filepath);
+        var content = yaml.safeLoad(grunt.file.read(filepath), {
+          filename: filepath,
+          schema: yaml.JSON_SCHEMA
+        });
+
+        return {
+          filePath: filepath,
+          content: content
+        };
       });
 
       var compiled = compileTranslations(src);
@@ -65,15 +74,21 @@ module.exports = function (grunt) {
     });
   });
 
+  /*jshint latedef: nofunc */
   function compileTranslations (srcList) {
     var compiled = {};
-    var rawJson = {};
 
+    var result = [];
     for (var i in srcList) {
-      _.merge(rawJson, srcList[i]);
-    }
+      var rawScr = srcList[i];
 
-    var result = recurseObject(rawJson);
+      try {
+        var tempResult = recurseObject(rawScr.content);
+        result = result.concat(tempResult);
+      } catch (e) {
+        throw new Error(e.message + ' in "' + rawScr.filePath + '" at ' + e.atProperty);
+      }
+    }
 
     // Merge result chains
     for (i = 0; i < result.length; i++) {
@@ -86,16 +101,24 @@ module.exports = function (grunt) {
     return compiled;
   }
 
+  /*jshint latedef: nofunc */
   function recurseObject (subObject) {
     var resultList = [];
+    var hasValues = false;
+    var hasChildren = false;
+
     for (var property in subObject) {
       // Get the language key and the translation value
       if (!_.isPlainObject(subObject[property])) {
+        hasValues = true;
+        checkHierarchy(hasValues, hasChildren, property);
         resultList.push([property, subObject[property]]);
         continue;
       }
 
-      // Do deeper and build the result chain
+      // Go deeper and build the result chain
+      hasChildren = true;
+      checkHierarchy(hasValues, hasChildren, property);
       var result = recurseObject(subObject[property]);
       for (var i = 0; i < result.length; i++) {
         var tmp = {};
@@ -107,6 +130,16 @@ module.exports = function (grunt) {
     return resultList;
   }
 
+  /*jshint latedef: nofunc */
+  function checkHierarchy(hasValues, hasChildren, property) {
+    if (hasValues && hasChildren) {
+      var error = new Error('Bad hierarchy format');
+      error.atProperty = property;
+      throw error;
+    }
+  }
+
+  /*jshint latedef: nofunc */
   function langFileDest (file, lang, langPlace) {
     if (langPlace && file.dest.indexOf(langPlace) >= 0) {
 
