@@ -128,5 +128,13 @@ exports.i18n_compile = {
     var errorFound = error_log.search(/Warning: bad indentation[\w\s]+?in "test\/fixtures\/bad_indentation_i18n[.]yaml"/i);
     test.equal(errorFound >= 0, true, 'should have logged an error.');
     test.done();
+  },
+  duplicated_keys: function (test) {
+    test.expect(1);
+
+    var error_log = grunt.file.read(errorLogFile);
+    var errorFound = error_log.search(/Warning: duplicated mapping key in "test\/fixtures\/duplicated_value_keys_i18n[.]yaml" at line \d+, column \d+:\n\s+LABEL[:]/i);
+    test.equal(errorFound >= 0, true, 'should have logged correct error.');
+    test.done();
   }
 };

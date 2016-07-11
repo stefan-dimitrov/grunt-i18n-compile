@@ -1,0 +1,19 @@
+MENU:
+  USER:
+    LABEL:
+      en: User
+      pt: Usuário
+      es: Usuario
+    LABEL:
+      en: User
+      pt: Usuário
+      es: Usuario
+    DROPDOWN:
+      EDIT:
+        en: Edit
+        pt: Editar
+        es: Editar
+      LOGOUT:
+        en: Logout
+        pt: Sair
+        es: Finalizar la Sesión

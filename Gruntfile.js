@@ -97,6 +97,14 @@ module.exports = function (grunt) {
         files: {
           'tmp/bad_indentation.json': ['test/fixtures/bad_indentation_i18n.yaml']
         }
+      },
+      duplicated_keys: {
+        options: {
+          merge: true
+        },
+        files: {
+          'tmp/duplicated_value_keys.json': ['test/fixtures/duplicated_value_keys_i18n.yaml']
+        }
       }
     },
 
@@ -114,7 +122,7 @@ module.exports = function (grunt) {
 
   });
 
-  var ERROR_TASKS = ['bad_indentation', 'sibling_values_and_children'];
+  var ERROR_TASKS = ['bad_indentation', 'sibling_values_and_children', 'duplicated_keys'];
 
   /**
    * Gather i18n_compile sub-tasks to be executed
