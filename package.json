@@ -1,6 +1,6 @@
 {
   "name": "grunt-i18n-compile",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Grunt Plugin for assembling JSON translation files from language-merged YAML input files.",
   "homepage": "https://github.com/stefan-dimitrov/grunt-i18n-compile",
   "repository": "git@github.com:stefan-dimitrov/grunt-i18n-compile.git",
@@ -16,8 +16,6 @@
     "angular",
     "translate",
     "translation",
-    "language",
-    "pre-compiler",
     "assemble",
     "compile",
     "yaml",
@@ -34,17 +32,13 @@
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^1.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-force-task": "^2.0.0",
     "jshint-stylish": "^2.2.0",
-    "load-grunt-tasks": "^3.5.0",
-    "logfile-grunt": "^0.3.0"
+    "load-grunt-tasks": "^3.5.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt"
   },
   "dependencies": {
-    "js-yaml": ">=3.4",
-    "lodash": ">=3.10"
+    "i18n-compile": "^1.0.0"
   }
 }

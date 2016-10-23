@@ -1,6 +1,6 @@
-# grunt-i18n-compile  &nbsp; [ ![Codeship Status for stefan-dimitrov/grunt-i18n-compile](https://codeship.com/projects/06c87fd0-4149-0133-3d15-4252ee2bf12d/status?branch=master)](https://codeship.com/projects/103580)
+# grunt-i18n-compile  [![Build Status](https://travis-ci.org/stefan-dimitrov/grunt-i18n-compile.svg?branch=master)](https://travis-ci.org/stefan-dimitrov/grunt-i18n-compile)
 
-Grunt Plugin for assembling JSON translation files from language-merged YAML input files.
+Assemble JSON translation files from language-merged YAML with [i18n-compile](https://github.com/stefan-dimitrov/i18n-compile).
 
 Output files are compatible with [angular-translate](https://angular-translate.github.io/) and [i18next](http://i18next.com/)
 

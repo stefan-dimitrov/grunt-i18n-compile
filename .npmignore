@@ -1,0 +1,6 @@
+test/
+Gruntfile.js
+.editorconfig
+.npmignore
+.jshintrc
+.travis.yml

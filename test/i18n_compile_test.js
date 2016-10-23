@@ -26,7 +26,6 @@ var errorMsg = 'compilation should match the expected compiled file ';
 var compiled_en = 'test/expected/file_per_lang/translations_en.json';
 var compiled_pt = 'test/expected/file_per_lang/translations_pt.json';
 var compiled_es = 'test/expected/file_per_lang/translations_es.json';
-var errorLogFile = 'tmp/error_logging_tasks.log';
 
 exports.i18n_compile = {
   setUp: function (done) {
@@ -101,32 +100,6 @@ exports.i18n_compile = {
     test.equal(actual_pt, expected_pt, errorMsg + compiled_pt);
     test.equal(actual_es, expected_es, errorMsg + compiled_es);
 
-    test.done();
-  },
-  lists: function (test) {
-    test.expect(1);
-
-    var compiled = 'test/expected/templates_merged.json';
-    var actual = grunt.file.read('tmp/lists_merged.json');
-    var expected = grunt.file.read(compiled);
-    test.equal(actual, expected, errorMsg + compiled);
-
-    test.done();
-  },
-  sibling_values_and_children: function (test) {
-    test.expect(1);
-
-    var error_log = grunt.file.read(errorLogFile);
-    var errorFound = error_log.search(/Warning: Bad hierarchy format in "test\/fixtures\/sibling_values_and_children_i18n[.]yaml"/i);
-    test.equal(errorFound >= 0, true, 'should have logged an error.');
-    test.done();
-  },
-  bad_indentation: function (test) {
-    test.expect(1);
-
-    var error_log = grunt.file.read(errorLogFile);
-    var errorFound = error_log.search(/Warning: bad indentation[\w\s]+?in "test\/fixtures\/bad_indentation_i18n[.]yaml"/i);
-    test.equal(errorFound >= 0, true, 'should have logged an error.');
     test.done();
   }
 };
